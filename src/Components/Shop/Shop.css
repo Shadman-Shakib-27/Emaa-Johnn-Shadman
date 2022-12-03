@@ -7,7 +7,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 45px;
-  margin: 20px 20px;
+  margin: 95px 20px;
 }
 .cart-container {
   background-color: #ff99004d;
