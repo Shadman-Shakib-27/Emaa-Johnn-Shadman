@@ -1,7 +1,8 @@
 import React from "react";
 import "./Cart.css";
 
-const Orders = ({ cart }) => {
+const Orders = (props) => {
+  const { cart } = props;
   // console.log(cart);
   // const {cart}=props
   // Direct {Cart} Ke Props Hisebe Receive Korteche
@@ -24,6 +25,8 @@ const Orders = ({ cart }) => {
       <p>Total Shipping: ${shipping} </p>
       <p>Tax: ${tax}</p>
       <h5>Grand Total: ${grandTotal.toFixed(2)}</h5>
+      {props.children}
+      {/* Children Props Er Maddhome */}
     </div>
   );
 };

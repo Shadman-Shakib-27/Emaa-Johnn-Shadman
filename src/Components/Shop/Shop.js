@@ -3,6 +3,7 @@ import Product from "../Product/Product";
 import Cart from "../Cart/Cart";
 import { addToDb, getStoredCart } from "../../utilities/fakedb";
 import "./Shop.css";
+import { useNavigate } from "react-router-dom";
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
@@ -46,6 +47,7 @@ const Shop = () => {
     // ...Cart Mane Existing Array Te Onno Ekta Element Copy Kore Add Kora
     // State Jekhane Eventhandler Sekhane.
   };
+  const navigate = useNavigate();
   return (
     <div className="shop-container">
       <div className="products-container">
@@ -58,7 +60,9 @@ const Shop = () => {
         ))}
       </div>
       <div className="cart-container">
-        <Cart cart={cart}></Cart>
+        <Cart cart={cart}>
+          <button onClick={() => navigate("/Orders")}>Review Orders</button>
+        </Cart>
       </div>
     </div>
   );
