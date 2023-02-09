@@ -61,6 +61,7 @@ const Shop = () => {
       </div>
       <div className="cart-container">
         <Cart cart={cart}>
+          {/* React Router Dynamic Navigation  */}
           <button onClick={() => navigate("/Orders")}>Review Orders</button>
         </Cart>
       </div>
