@@ -1,11 +1,17 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
+
 import "./Register.css";
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfrimPassword] = useState("");
   const [error, setError] = useState("");
+  const [createUserWithEmailAndPassword, user] =
+    useCreateUserWithEmailAndPassword(auth);
+  const navigate = useNavigate();
 
   const handleEmailBlur = (event) => {
     setEmail(event.target.value);
@@ -16,12 +22,20 @@ const Register = () => {
   const handleConfirmPasswordBlur = (event) => {
     setConfrimPassword(event.target.value);
   };
+  if (user) {
+    navigate("/Shop");
+  }
   const handleSubmit = (event) => {
     event.preventDefault();
     if (password !== confirmPassword) {
       setError("Your two password didn't matched");
       return;
     }
+    if (password.length !== 6) {
+      setError("Password must contain at least 6 character or long");
+    }
+
+    createUserWithEmailAndPassword(email, password);
     console.log("Form Submitted", email, password, confirmPassword);
   };
 
@@ -61,7 +75,7 @@ const Register = () => {
             />
           </div>
           <p style={{ color: "red" }}>{error}</p>
-          <input className="form-submit" type="submit" value="Login" />
+          <input className="form-submit" type="submit" value="Register" />
         </form>
         <p className="NTEJ">
           Already Have an account?
